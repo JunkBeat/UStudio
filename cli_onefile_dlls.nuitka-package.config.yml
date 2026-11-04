@@ -1,0 +1,108 @@
+# Nuitka "package configuration" file — the ONLY mechanism that actually
+# bundles a raw, not-otherwise-import-traceable native .dll/.exe file into a
+# Nuitka build (confirmed against Nuitka's own official docs and its own
+# shipped standard.nuitka-package.config.yml examples, e.g. the real
+# 'cryptoauthlib'/'clr_loader.ffi' entries there — not guessed): both
+# --include-data-dir and --include-package-data DOCUMENT that they exclude
+# every .dll/.exe file unconditionally, no matter which folder they're
+# pointed at ("DLLs and extension modules are not data files and never
+# included like this"). This file plugs that specific, real gap for
+# build_CLI_portable (one file).py's --onefile build — see that script's own
+# module docstring for the actual bug report (a real IL2CPP fixture crashing
+# with "Could not find module '...\TypeTreeGeneratorAPI\
+# TypeTreeGeneratorAPI.dll'") that led here, and for how this file is passed
+# to Nuitka (--user-package-configuration-file).
+#
+# Five packages needed this, not just the one that actually crashed first:
+# TypeTreeGeneratorAPI (ctypes-loaded IL2CPP TypeTree generation — the
+# reported bug), UnityPy's own bundled UnityPy/resources/bcn_encoder/
+# (pythonnet-loaded BC7/etc. texture encoding), UnityPy/resources/
+# fsb5_converter/ (subprocess-launched WAV->FSB5 audio encoding), and
+# UnityPy/resources/ffmpeg/ (subprocess-launched video transcode/probe,
+# ffmpeg.exe + ffprobe.exe — added when that feature was built; same gap,
+# found proactively this time by checking this exact file rather than
+# waiting for a repeat crash report), and UnityPy/resources/msdf_atlas_gen/ (SDF font generation, msdf-atlas-gen.exe;
+# forgotten at first, found by diffing a build's payload). All five load their natives via
+# ctypes/pythonnet/subprocess, never via a real Python `import` of the
+# binary itself, which is exactly the class of file both data-inclusion
+# flags above refuse to touch.
+#
+# *** READ BEFORE ADDING A NEW ENTRY BELOW ***
+# A module-name entry here is NOT enough by itself. Confirmed via a real,
+# isolated --onefile reproduction (build_CLI_portable (one file).py's own
+# module docstring has the full writeup): Nuitka's dll-files plugin only
+# processes an entry for a module it has ALREADY decided is part of the
+# compiled program's own import graph. UnityPy.resources.ffmpeg/
+# fsb5_converter/bcn_encoder/msdf_atlas_gen each exist ONLY as a resource-holding folder
+# resolved via pure filesystem-path math (core/video_transcode.py's
+# FFMPEG_EXE, Fsb5Encoder.py's/BcnEncoder.py's own _RESOURCE_DIR) — none of
+# them were ever the target of a real `import` statement anywhere, so ALL
+# THREE silently vanished from real --onefile builds until a matching no-op
+# `import UnityPy.resources.<name>  # noqa: F401` was added next to each
+# one's own path-resolution code. TypeTreeGeneratorAPI never had this problem
+# — it's a genuine third-party package with a real top-level
+# `import TypeTreeGeneratorAPI` in UnityPy/helpers/TypeTreeGenerator.py.
+#
+# Adding a new entry here for a module that's ONLY ever reached via ctypes/
+# pythonnet/subprocess (never a real Python import) WILL reproduce this exact
+# bug — silently, no build error, no runtime error until someone actually
+# exercises that feature. Add the matching no-op import wherever that
+# module's own path-resolution code lives, in the SAME commit as the new
+# YAML entry below.
+
+- module-name: 'TypeTreeGeneratorAPI'
+  dlls:
+    - from_filenames:
+        prefixes:
+          - 'TypeTreeGeneratorAPI'
+          - 'capstone'
+
+- module-name: 'UnityPy.resources.bcn_encoder'
+  dlls:
+    - from_filenames:
+        prefixes:
+          - 'BCnEncoder'
+          - 'CommunityToolkit'
+          - 'SixLabors'
+
+- module-name: 'UnityPy.resources.fsb5_converter'
+  dlls:
+    - from_filenames:
+        prefixes:
+          - 'fmod'
+          - 'fsbank'
+          - 'libfsbvorbis64'
+          - 'libmp3lame64'
+          - 'opus'
+    - from_filenames:
+        prefixes:
+          - 'FSB5'
+        executable: 'yes'
+
+- module-name: 'UnityPy.resources.ffmpeg'
+  dlls:
+    - from_filenames:
+        prefixes:
+          - 'ffmpeg'
+          - 'ffprobe'
+        executable: 'yes'
+
+# msdf-atlas-gen.exe (SDF font generation, subprocess-launched by core/sdf_generator.py). It was missing here
+# until a CLI build came out ~45 MB smaller than expected and a payload diff against UnityPy/resources found it:
+# the build gave no error, and `import` of an sdf_map.txt would only have failed at run time. The matching
+# no-op `import UnityPy.resources.msdf_atlas_gen` already sits in core/sdf_generator.py.
+- module-name: 'UnityPy.resources.msdf_atlas_gen'
+  dlls:
+    - from_filenames:
+        prefixes:
+          - 'msdf-atlas-gen'
+        executable: 'yes'
+
+# etc_encoder.dll (ETC1/ETC2 texture import, loaded with ctypes by UnityPy/helpers/EtcEncoder.py, which also
+# holds the matching no-op `import UnityPy.resources.etc_encoder`). Without this entry a CLI build would
+# silently fall back to etcpak's blurrier ETC2.
+- module-name: 'UnityPy.resources.etc_encoder'
+  dlls:
+    - from_filenames:
+        prefixes:
+          - 'etc_encoder'

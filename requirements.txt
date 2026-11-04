@@ -1,0 +1,50 @@
+# UStudio (GUI) runtime dependencies.
+PyQt6
+rich
+markdown-it-py
+
+# The vendored UnityPy (UStudio/UnityPy) and what it imports.
+numpy
+pillow
+attrs
+brotli
+lz4
+fsspec
+etcpak
+texture2ddecoder>=1.0.5
+astc-encoder-py>=0.1.12
+tpk_ar
+TypeTreeGeneratorAPI>=0.0.10
+
+# Required by UnityPy/helpers/BcnEncoder.py — loads the vendored BCnEncoder.NET/
+# SixLabors.ImageSharp DLLs (UnityPy/resources/bcn_encoder/) in-process via .NET
+# CoreCLR, used for BC1/BC2/BC3/BC4/BC5/BC7 texture compression on converted
+# import. Needs an actual .NET 6 runtime installed on the machine (Microsoft.NETCore.App 6.x) 
+# — NOT bundled,
+# same as this project not bundling a Python interpreter either.
+pythonnet
+clr_loader
+
+# Required by UnityPy/export/AudioClipConverter.py (extract_audioclip_samples) —
+# decodes AudioClip sample data (FSB5-wrapped and otherwise) for export/preview.
+# Needs a real fmod.dll on the system at runtime (see
+# UnityPy/helpers/Fsb5Encoder.py's ensure_fmod_dll_override() for why this
+# project points it at a specific, already-vendored one rather than
+# fmod_toolkit's own older bundled copy).
+fmod_toolkit
+pyfmodex
+
+# Required by core/object_preview.py's VideoClip converted-import pre-flight
+# check (ffmpeg.probe()) — compares a candidate video file's own codec/
+# dimensions against the target VideoClip's declared fields before packaging
+# it in, as a non-blocking sanity warning. Needs a real ffmpeg/ffprobe
+# installation on the system PATH — not bundled, same as pythonnet needing an
+# actual .NET runtime above. This is "ffmpeg-python" on PyPI specifically
+# (import name is still `ffmpeg`) — NOT the unrelated, unmaintained "ffmpeg"
+# PyPI package of the same import name; confirmed via `pip show` before
+# relying on it, since installing the wrong one silently gives a
+# completely different, incompatible API under the identical import.
+ffmpeg-python
+
+# Regular expressions in the text search (tools/text_search_tool.py RegexSearch)
+regex

@@ -1,0 +1,59 @@
+UStudio — third-party components
+================================
+
+UStudio is free software under the GNU General Public License v3.0 (see LICENSE).
+Source code: https://github.com/JunkBeat/UStudio
+
+The program includes the components below. Each keeps its own license;
+their license texts are in the files named here or on the project pages.
+
+
+Python libraries
+----------------
+UnityPy (modified copy)      MIT                   https://github.com/K0lb3/UnityPy
+                             Our changes: UnityPy_patches/ in the source repository.
+PyQt6                        GPL-3.0               https://www.riverbankcomputing.com/software/pyqt/
+Qt 6                         LGPL-3.0              https://www.qt.io
+Python                       PSF License           https://www.python.org
+NumPy                        BSD-3-Clause          https://numpy.org
+Pillow                       MIT-CMU               https://python-pillow.github.io
+TypeTreeGeneratorAPI         MIT                   https://github.com/UnityPy-Org/TypeTreeGeneratorAPI
+etcpak (Python bindings)     MIT                   https://github.com/K0lb3/etcpak
+texture2ddecoder             MIT                   https://github.com/K0lb3/texture2ddecoder
+astc-encoder-py              MIT                   https://github.com/K0lb3/astc-encoder-py
+fmod_toolkit                 MIT                   https://github.com/K0lb3/fmod_toolkit
+pyfmodex                     MIT                   https://github.com/tyrylu/pyfmodex
+pythonnet, clr_loader        MIT                   https://github.com/pythonnet/pythonnet
+attrs, brotli, rich,
+markdown-it-py               MIT
+lz4, fsspec                  BSD-3-Clause
+regex                        Apache-2.0
+ffmpeg-python                Apache-2.0
+
+
+Bundled programs and native libraries
+-------------------------------------
+Il2CppDumper (modified)      MIT                   https://github.com/Perfare/Il2CppDumper
+                             bundled_tools/il2cpp_dumper/LICENSE.txt; our changes are the .patch files there.
+  Mono.Cecil                 MIT                   https://github.com/jbevain/cecil
+BCnEncoder.NET               MIT or Unlicense      https://github.com/Nominom/BCnEncoder.NET
+SixLabors.ImageSharp 3       Six Labors Split License 1.0 (Apache-2.0 terms for open-source use)
+                                                   https://github.com/SixLabors/ImageSharp
+CommunityToolkit.HighPerformance  MIT              https://github.com/CommunityToolkit/dotnet
+etcpack (from Compressonator)  MIT (AMD) + Ericsson notice
+                             UnityPy/resources/etc_encoder/LICENSE.txt
+msdf-atlas-gen               MIT                   https://github.com/Chlumsky/msdf-atlas-gen
+FSB5.Converter                                     https://github.com/JunkBeat/FSB5.Converter
+FFmpeg (ffmpeg.exe, ffprobe.exe)  LGPL-2.1-or-later   https://ffmpeg.org
+                             Built without GPL parts (--disable-gpl), with libvpx (BSD-3-Clause)
+                             and libvorbis (BSD-3-Clause). Source: https://ffmpeg.org/download.html
+LAME (libmp3lame64.dll)      LGPL-2.0-or-later     https://lame.sourceforge.io
+Opus (opus.dll)              BSD-3-Clause          https://opus-codec.org
+
+
+FMOD
+----
+FMOD Core and FSBank (fmod.dll, fsbank.dll, libfsbvorbis64.dll)
+Audio engine: FMOD by Firelight Technologies Pty Ltd.  https://www.fmod.com
+Used under the FMOD End User License Agreement. These files are not part of
+UStudio's source repository and are not covered by UStudio's license.
