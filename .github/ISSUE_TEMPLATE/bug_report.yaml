@@ -1,0 +1,61 @@
+name: Bug Report
+description: File a bug or crash report
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for submitting a bug report; please fill in with as much detail as possible.
+  - type: dropdown
+    id: ustudio_version
+    attributes:
+      label: Are you on the latest version of UStudio?
+      description: If not, you must update first.
+      options:
+        - No, I need to download a newer version and try again.
+        - Yes, I'm on the latest release of UStudio.
+    validations:
+      required: true
+  - type: textarea
+    id: game_name
+    attributes:
+      label: Which game did this occur on?
+      description: (Optional but preferred) Please tell us the game's name. If the game is available on Steam, a [SteamDB](https://steamdb.info/) link would be ideal. Similarly for an Android game, a [Google Play](https://play.google.com/store/games) link is ideal.
+    validations:
+      required: false
+  - type: textarea
+    id: game_version
+    attributes:
+      label: Which Unity version did this occur on?
+      description: Please tell us the game's Unity version. If you don't know, [here](https://ngyikp.com/find-unity-game-build-version/) is a short guide to determine it.
+    validations:
+      required: false
+  - type: dropdown
+    id: game_backend
+    attributes:
+      label: Is the game Mono or Il2Cpp?
+      description: Desktop Il2Cpp games have a GameAssembly.dll in the same directory as the game executable file. Android Il2Cpp games have a libil2cpp.so file in the lib directory (or one of its subdirectories).
+      options:
+        - Unknown
+        - Mono
+        - Il2Cpp
+        - Not Applicable
+    validations:
+      required: false
+  - type: textarea
+    id: what_happened
+    attributes:
+      label: Describe the issue.
+      description: What happened? Should something else have happened instead? Please provide steps to reproduce the issue if possible.
+      placeholder: Tell us what you see! 
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: |
+        Please drag and drop your relevant UStudio log here. This could be the contents of the log area in the main UStudio window, or the contents of the `crash.log` file, which you can locate as follows: Settings → Preferences... → General tab → click "Open the UStudio data folder" button (or simply navigate to the path `C:\Users\<NAME>\AppData\Local\UStudio`).
+    validations:
+      required: false
