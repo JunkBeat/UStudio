@@ -1,6 +1,7 @@
-[![](https://img.shields.io/github/downloads/JunkBeat/UStudio/total.svg)](https://github.com/JunkBeat/UStudio/releases)
-[![](https://img.shields.io/github/downloads/JunkBeat/UStudio/latest/total.svg)](https://github.com/JunkBeat/UStudio/releases/latest)
-[![](https://img.shields.io/github/v/release/JunkBeat/UStudio)](https://github.com/JunkBeat/UStudio/releases/latest)
+[![Views](https://hits.sh/github.com/JunkBeat/UStudio.svg?label=views&color=4c1)](https://hits.sh/github.com/JunkBeat/UStudio/)
+[![Downloads Total](https://img.shields.io/github/downloads/JunkBeat/UStudio/total.svg)](https://github.com/JunkBeat/UStudio/releases)
+[![Downloads Latest](https://img.shields.io/github/downloads/JunkBeat/UStudio/latest/total.svg)](https://github.com/JunkBeat/UStudio/releases/latest)
+[![Latest Release](https://img.shields.io/github/v/release/JunkBeat/UStudio)](https://github.com/JunkBeat/UStudio/releases/latest)
 
 <h1>UStudio</h1>
 
@@ -10,10 +11,13 @@
   Written in Python, based on the <a href="https://github.com/K0lb3/UnityPy">UnityPy</a> library.
 </p>
 
-<p>
-  <img src="images/main-window.png" alt="UStudio main window">
-  <img src="images/tools.png" alt="UStudio tools">
-</p>
+<table>
+<tr>
+<td width="50%"><img src="images/main-window.png" alt="UStudio main window"><br>Main Window</td>
+<td width="50%"><img src="images/tools.png" alt="UStudio tools"><br>Tools</td>
+</tr>
+</table>
+
 <sub>UStudio v1.5.0.</sub>
 
 ## Features
