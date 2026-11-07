@@ -45,9 +45,9 @@ _CONTROL_HEIGHT = 28
 # first, matching the same "safe default" convention this app already uses
 # elsewhere (e.g. TextureFormatMode's own match_original-first ordering).
 _MODE_OPTIONS = (
-    (N_("Добавление новых символов"), MODE_ADD),
-    (N_("Замена + добавление символов"), MODE_REPLACE_ENTERED),
-    (N_("Полная замена"), MODE_REPLACE_ALL),
+    ("Добавление новых символов", MODE_ADD),
+    ("Замена + добавление символов", MODE_REPLACE_ENTERED),
+    ("Полная замена", MODE_REPLACE_ALL),
 )
 
 
@@ -314,8 +314,8 @@ class SDFSettingsPanel(QWidget):
         mode_row.addWidget(_make_label_cell(tr("Режим:"), tr(_MODE_HELP)))
         self.combo_mode = QComboBox()
         self.combo_mode.setFixedHeight(_CONTROL_HEIGHT)
-        for label, _mode in _MODE_OPTIONS:
-            self.combo_mode.addItem(label)
+        for text_key, _mode in _MODE_OPTIONS:
+            self.combo_mode.addItem(tr(text_key), _mode)
         self.combo_mode.setCurrentIndex(
             next((i for i, (_label, m) in enumerate(_MODE_OPTIONS) if m == mode), 0))
         self.combo_mode.currentIndexChanged.connect(self._on_mode_changed)
