@@ -114,8 +114,8 @@ This is an independent project. The AI-assisted work here is separate from upstr
 ## Tips
 
 If you find this tool useful, please consider tipping to support development:
-<a href="https://ko-fi.com/ustudio">Ko-fi</a>
-<a href="https://mobile-app.pumb.ua/Xk15NyXS2HkqNSTP7">Pumb</a>
+- [Ko-fi](https://ko-fi.com/ustudio)
+- [Pumb](https://mobile-app.pumb.ua/Xk15NyXS2HkqNSTP7)
 
 ## Credits
 
