@@ -9,7 +9,7 @@
   Browse, preview, export and patch the assets of Unity games.<br>
   Built for translators and modders.
   Written in Python using the <a href="https://github.com/K0lb3/UnityPy">UnityPy</a> library.<br>
-  <a href="https://github.com/JunkBeat/UStudio/releases/latest"><b>Download latest release</b></a>
+  <a href="https://github.com/JunkBeat/UStudio/releases/latest"><b>Download the latest release</b></a>
 </p><br>
 
 <img src="images/image-main.png" alt="UStudio" width=900>
@@ -110,6 +110,12 @@ This project was made with heavy use of an AI coding assistant (Claude, through 
 - The software was manually spot-checked across various scenarios (loading, exporting, patching).
 
 This is an independent project. The AI-assisted work here is separate from upstream libraries (such as UnityPy), and their maintainers are not responsible for it. Please report any bugs or issues directly in this repository's issue tracker.
+
+## Tips
+
+If you find this tool useful, please consider tipping to support development:
+<a href="https://ko-fi.com/ustudio">Ko-fi</a>
+<a href="https://mobile-app.pumb.ua/Xk15NyXS2HkqNSTP7">Pumb</a>
 
 ## Credits
 
