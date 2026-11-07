@@ -39,7 +39,7 @@ ROOT = Path(__file__).resolve().parent
 APP_DIR = ROOT / "UStudio"
 GUI_BUILD = ROOT / "dist" / "UStudio"
 CLI_BUILD = ROOT / "dist-cli"
-DEFAULT_RELEASES = ROOT.parent / "Релизы"
+DEFAULT_RELEASES = "UStudio-Releases"
 
 _JUNK_DIRS = {".git", ".vscode", "__pycache__"}
 _JUNK_NAMES = {".gitattributes", ".gitignore"}
@@ -150,7 +150,7 @@ def _load_build_script_lists():
     """GUI_DOCS and CLI_DOCS from the build scripts (so the file lists are defined in one place)."""
     sys.path.insert(0, str(ROOT))
     gui = _load_module(ROOT / "build_GUI_portable.py", "_release_build_gui")
-    cli = _load_module(ROOT / "build_CLI_portable (one file).py", "_release_build_cli")
+    cli = _load_module(ROOT / "build_CLI_portable.py", "_release_build_cli")
     return list(gui.GUI_DOCS), list(cli.CLI_DOCS)
 
 
